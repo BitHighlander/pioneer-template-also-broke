@@ -50,15 +50,15 @@ import { KeepKeyIcon } from "lib/assets/Icons/KeepKeyIcon";
 // import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 
 // import Context from "lib/context";
-// import { usePioneer } from "lib/context/Pioneer";
+import { usePioneer } from "lib/context/Pioneer";
 
 // const Pioneer = new PioneerService();
 
 const Header = () => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
 
-  // const { state } = usePioneer();
-  // const { api, user, context } = state;
+  const { state } = usePioneer();
+  const { api, user, context } = state;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [pioneerConnected, setPioneerConnected] = useState(false);
@@ -129,6 +129,7 @@ const Header = () => {
 
   const onStart = async function () {
     try {
+      localStorage.setItem("chakra-ui-color-mode", "dark");
       // if(!wallet)
       //   await connect();
       // eslint-disable-next-line no-console
@@ -150,9 +151,9 @@ const Header = () => {
   // }, [user, user?.assetContext]); // once on startup
 
   // onStart()
-  // useEffect(() => {
-  //   onStart();
-  // }, [state, state.api]); // once on startup
+  useEffect(() => {
+    onStart();
+  }, [state, state.api]); // once on startup
 
   // const setUser = async function () {
   //   try {
